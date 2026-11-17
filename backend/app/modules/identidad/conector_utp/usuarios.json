@@ -1,0 +1,56 @@
+[
+  {
+    "codigo_utp": "U90000001",
+    "tipo_usuario": "estudiante",
+    "nombres": "Lucía Fernanda",
+    "apellidos": "Rojas Paredes",
+    "correo_institucional": "u90000001@utp.edu.pe",
+    "sede": "Torre Arequipa",
+    "estado_matricula": "activo"
+  },
+  {
+    "codigo_utp": "U90000002",
+    "tipo_usuario": "estudiante",
+    "nombres": "Diego Alonso",
+    "apellidos": "Salazar Medina",
+    "correo_institucional": "u90000002@utp.edu.pe",
+    "sede": "Torre Arequipa",
+    "estado_matricula": "activo"
+  },
+  {
+    "codigo_utp": "U90000003",
+    "tipo_usuario": "estudiante",
+    "nombres": "Valeria Sofía",
+    "apellidos": "Mendoza Ríos",
+    "correo_institucional": "u90000003@utp.edu.pe",
+    "sede": "Torre Arequipa",
+    "estado_matricula": "activo"
+  },
+  {
+    "codigo_utp": "U90000004",
+    "tipo_usuario": "docente",
+    "nombres": "Martín Eduardo",
+    "apellidos": "Torres Vega",
+    "correo_institucional": "u90000004@utp.edu.pe",
+    "sede": "Torre Arequipa",
+    "estado_matricula": "activo"
+  },
+  {
+    "codigo_utp": "U90000005",
+    "tipo_usuario": "administrativo",
+    "nombres": "Personal",
+    "apellidos": "Administrativo Demo",
+    "correo_institucional": "u90000005@utp.edu.pe",
+    "sede": "Torre Arequipa",
+    "estado_matricula": "activo"
+  },
+  {
+    "codigo_utp": "U90000006",
+    "tipo_usuario": "estudiante",
+    "nombres": "Alumno",
+    "apellidos": "Matricula Inactiva",
+    "correo_institucional": "u90000006@utp.edu.pe",
+    "sede": "Torre Arequipa",
+    "estado_matricula": "inactivo"
+  }
+]

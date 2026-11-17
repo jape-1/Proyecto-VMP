@@ -1,0 +1,70 @@
+# Entorno / secretos
+.env
+.env.*
+!.env.example
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Imágenes y artefactos de la demo (no se suben: docs/18 §12)
+backend/media/
+*.jpg
+*.jpeg
+*.png
+# ...salvo las fotos de ejemplo que se decida versionar expresamente
+!docs/**/*.png
+!docs/**/*.jpg
+
+# Modelo
+*.pt
+*.onnx
+runs/
+datasets/
+
+# Herramientas
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+*.log
+
+# Salidas sueltas de comandos
+pytest-out.txt
+ruff.txt
+rufffmt.txt
+alembic-out.txt
+seed-out.txt
+demo-out.txt
+check_urls.py
+d.txt
+u.txt
+uvicorn.log
+uvicorn.err
+
+# Datasets y pesos (no se suben)
+*.zip
+
+# Frontend
+node_modules/
+dist/
+
+# Logo oficial (no se versiona, ver frontend/src/assets/LEEME.md)
+frontend/src/assets/logo-utp.*
+
+# Fotos de prueba de la IA (salen de datasets externos; ver ia_service/ATRIBUCIONES.md)
+ia_service/tests/fixtures/
+
+# Fotos y evidencias que genera el backend al correr
+media/
+
+# Herramientas de pruebas del navegador
+playwright-report/
+test-results/

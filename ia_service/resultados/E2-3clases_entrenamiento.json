@@ -1,0 +1,59 @@
+{
+  "experimento": "E2-3clases",
+  "pesos_iniciales": "yolo26n.pt",
+  "modo": "reanudar",
+  "hiperparametros": {
+    "epocas": 100,
+    "paciencia": 20,
+    "imgsz": 640,
+    "batch": 16,
+    "semilla": 42,
+    "tiempo_horas": null
+  },
+  "segundos_esta_sesion": 8754,
+  "imagenes": {
+    "test": 785,
+    "val": 1632,
+    "train": 5771
+  },
+  "entorno": {
+    "python": "3.13.16",
+    "ultralytics": "8.4.215",
+    "torch": "2.14.1+cu130",
+    "gpu": "Tesla T4"
+  },
+  "fecha": "2026-11-17T05:55:46+00:00",
+  "metricas_val": {
+    "P": 0.9502360518496781,
+    "R": 0.9362116012522379,
+    "mAP50": 0.9681367206550956,
+    "mAP50_95": 0.7356107568602624,
+    "por_clase": {
+      "scooter": {
+        "P": 0.936561582833741,
+        "R": 0.8891337662873099,
+        "mAP50": 0.9404382420899752,
+        "mAP50_95": 0.660333225078419
+      },
+      "bicicleta": {
+        "P": 0.9657996207050186,
+        "R": 0.9737751215942342,
+        "mAP50": 0.990702319659275,
+        "mAP50_95": 0.7687165239627578
+      },
+      "moto_electrica": {
+        "P": 0.9483469520102745,
+        "R": 0.9457259158751696,
+        "mAP50": 0.9732696002160365,
+        "mAP50_95": 0.7777825215396105
+      }
+    },
+    "ms_por_imagen": {
+      "preprocess": 1.14,
+      "inference": 3.77,
+      "loss": 0.0,
+      "postprocess": 1.64
+    },
+    "graficos": "/content/drive/MyDrive/vmp/salidas/runs/E2-3clases_val"
+  }
+}

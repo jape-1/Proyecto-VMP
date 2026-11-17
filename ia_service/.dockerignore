@@ -1,0 +1,8 @@
+.venv/
+pesos/
+training/
+resultados/
+tests/
+**/__pycache__/
+.pytest_cache/
+.ruff_cache/

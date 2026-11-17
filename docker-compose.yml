@@ -1,0 +1,87 @@
+# Docker Compose del avance (docs/18 §3, docs/21).
+#
+#   docker compose up --build                             # con el doble de la IA
+#   IA_MODO=http docker compose --profile ia up --build   # con el detector real
+#
+#   Frontend  http://localhost:5173      Backend  http://localhost:8000/docs
+#
+# El detector real necesita `ia_service/pesos/E2-3clases-best.pt` (no está en Git).
+# Si el puerto 5432 ya está ocupado en tu equipo: DB_PUERTO=55433 docker compose up
+
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: admin
+      POSTGRES_DB: vmp
+    ports:
+      # Si ya tienes un PostgreSQL local en 5432: DB_PUERTO=55433 docker compose up
+      - "${DB_PUERTO:-5432}:5432"
+    volumes:
+      - datos_db:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d vmp"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  backend:
+    build:
+      context: ./backend
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      ENTORNO: dev
+      DATABASE_URL: postgresql+psycopg://postgres:admin@db:5432/vmp
+      JWT_SECRETO: ${JWT_SECRETO:-cambiar-en-produccion}
+      QR_SECRETO: ${QR_SECRETO:-cambiar-en-produccion-qr}
+      MEDIA_SECRETO: ${MEDIA_SECRETO:-cambiar-en-produccion-media}
+      MEDIA_ROOT: /app/media
+      IA_MODO: ${IA_MODO:-stub}
+      IA_URL: ${IA_URL:-http://ia_service:8001}
+      IA_UMBRAL_VALIDADO: ${IA_UMBRAL_VALIDADO:-0.60}
+      IA_UMBRAL_SEMEJANZA: ${IA_UMBRAL_SEMEJANZA:-0.70}
+      CORS_ORIGENES: ${CORS_ORIGENES:-http://localhost:5173,http://localhost:3000}
+      # 1 = vehículos de ejemplo con fotos dibujadas. 0 = cada perfil empieza vacío (demo).
+      SEED_VEHICULOS: ${SEED_VEHICULOS:-0}
+    ports:
+      - "8000:8000"
+    volumes:
+      - media:/app/media
+    # Migra y siembra antes de levantar el servidor: demo repetible desde cero.
+    command: >
+      sh -c "python -m alembic upgrade head &&
+             python -m app.seed &&
+             uvicorn app.main:app --host 0.0.0.0 --port 8000"
+
+  # Portal, App y Punto de acceso: http://localhost:5173
+  frontend:
+    build:
+      context: ./frontend
+      args:
+        VITE_API_URL: ${VITE_API_URL:-}
+    depends_on:
+      - backend
+    ports:
+      - "5173:80"
+
+  # Detector YOLO26 + comparador de semejanza (docs/26). Los pesos no están en Git:
+  # copia `E2-3clases-best.pt` a `ia_service/pesos/` antes de levantar.
+  # Se monta solo con el perfil `ia`; sin él, el backend usa el doble (IA_MODO=stub):
+  #   IA_MODO=http docker compose --profile ia up --build
+  ia_service:
+    profiles: ["ia"]
+    build:
+      context: ./ia_service
+    environment:
+      MODELO_PATH: /app/pesos/E2-3clases-best.pt
+    ports:
+      - "8001:8001"
+    volumes:
+      - ./ia_service/pesos:/app/pesos:ro
+
+volumes:
+  datos_db:
+  media:

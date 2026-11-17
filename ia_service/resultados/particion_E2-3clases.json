@@ -1,0 +1,47 @@
+{
+  "semilla": 42,
+  "proporciones": {
+    "train": 0.7,
+    "val": 0.2,
+    "test": 0.1
+  },
+  "clases": [
+    "scooter",
+    "bicicleta",
+    "moto_electrica"
+  ],
+  "imagenes": {
+    "test": 785,
+    "val": 1632,
+    "train": 5771
+  },
+  "grupos": {
+    "test": 512,
+    "val": 1023,
+    "train": 3582
+  },
+  "imagenes_sin_objetos": {
+    "test": 7,
+    "val": 25,
+    "train": 126
+  },
+  "objetos_por_clase": {
+    "train": {
+      "bicicleta": 1655,
+      "moto_electrica": 2347,
+      "scooter": 2687
+    },
+    "val": {
+      "bicicleta": 435,
+      "moto_electrica": 737,
+      "scooter": 797
+    },
+    "test": {
+      "bicicleta": 200,
+      "moto_electrica": 339,
+      "scooter": 408
+    }
+  },
+  "avisos": [],
+  "nota": "val/test salen de datasets EXTERNOS (sin fotos propias): métricas no representativas de la Torre Arequipa"
+}
